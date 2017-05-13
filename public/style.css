@@ -1,0 +1,9 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  font: 16px sans;
+  margin: 0;
+  background: rgb(48, 48, 48);
+}
