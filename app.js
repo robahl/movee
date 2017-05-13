@@ -16,8 +16,10 @@ if (process.env.NODE_ENV === 'production') {
 
 app.use(express.static(__dirname + '/public'));
 
-server.listen(port);
+server.listen(port, function () {
+  console.log(`Runnin' on ${port}`)
+});
 
 io.on('connection', function (socket) {
-  console.console.log('Client connection');
+  console.log('Client connection');
 });
