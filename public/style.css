@@ -3,8 +3,16 @@ html, body {
 }
 
 body {
-  font: 16px sans;
+  font: 20px monospace;
   margin: 0;
   background: rgb(235, 235, 235);
   cursor: url('win-cursor.png'), auto;
+}
+
+.online-users {
+  text-align: center;
+}
+
+img {
+  position: absolute;
 }

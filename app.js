@@ -20,6 +20,26 @@ server.listen(port, function () {
   console.log(`Runnin' on ${port}`)
 });
 
+var cursors = {};
+
 io.on('connection', function (socket) {
-  console.log('Client connection');
+  cursors[socket.id] = {x: 0, y: 0};
+  socket.emit('cursors', cursors);
+
+  socket.on('disconnect', function (reason) {
+    delete cursors[socket.id];
+    socket.broadcast.emit('user-leave', socket.id);
+    socket.broadcast.emit('cursors', cursors);
+  });
+
+  socket.on('new-user', function () {
+    socket.broadcast.emit('cursors', cursors);
+  });
+
+  socket.on('client-cursor-move', function (data) {
+    cursors[socket.id].x = data.x;
+    cursors[socket.id].y = data.y;
+    socket.broadcast.emit('cursor-move', {socketID: socket.id, x: data.x, y: data.y});
+  });
+
 });
